@@ -11,7 +11,7 @@ from abc import ABC
 import os
 
 
-class Config(ABC):
+class Config(object):
     """
     Initial configuration settings
     This class should not be instantiated directly
@@ -21,6 +21,7 @@ class Config(ABC):
     TESTING = False
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
 
 class DevelopmentConfig(Config):
@@ -44,7 +45,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
 
-class TestingConfig(Config):
+class TestingConfig(object):
     """
     Testing configuration settings
     This configuration is used when running tests.
@@ -76,7 +77,11 @@ class ProductionConfig(Config):
     TESTING = False
     DEBUG = False
 
+    app.config.from_object('config.DevelopmentConfig' if os.environ.get('ENV') == 'development' else 'config.ProductionConfig')
+    db = SQLAlchemy(app)
     SQLALCHEMY_DATABASE_URI = os.getenv(
         "DATABASE_URL",
         "postgresql://user:password@localhost/hbnb_prod"
     )
+    DATABASE_TYPE=sqlite  # Options: 'sqlite', 'postgresql'
+    DATABASE_URL=sqlite:///dev.db  # URL for SQLite or connection string for PostgreSQL
