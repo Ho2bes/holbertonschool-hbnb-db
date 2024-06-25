@@ -12,6 +12,11 @@ def create_app(config_class="src.config.DevelopmentConfig") -> Flask:
     The default configuration class is DevelopmentConfig.
     """
     app = Flask(__name__)
+    from flask_sqlalchemy import SQLAlchemy
+
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///development.db'
+    db = SQLAlchemy(app)
     app.url_map.strict_slashes = False
 
     app.config.from_object(config_class)
