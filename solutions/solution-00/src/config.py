@@ -9,7 +9,8 @@ This module exports configuration classes for the Flask application.
 
 from abc import ABC
 import os
-
+from sqlalchemy import app
+from sqlalchemy import SQLAlchemy
 
 class Config(object):
     """
@@ -83,5 +84,3 @@ class ProductionConfig(Config):
         "DATABASE_URL",
         "postgresql://user:password@localhost/hbnb_prod"
     )
-    DATABASE_TYPE=sqlite  # Options: 'sqlite', 'postgresql'
-    DATABASE_URL=sqlite:///dev.db  # URL for SQLite or connection string for PostgreSQL
