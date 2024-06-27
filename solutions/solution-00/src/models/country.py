@@ -1,6 +1,9 @@
-"""
-Country related functionality
-"""
+from . import db
+
+class State(db.Model):
+    id = db.Column(db.String(36), primary_key=True)
+    name = db.Column(db.String(128), nullable=False)
+    cities = db.relationship('City', backref='state', lazy=True)
 
 
 class Country:

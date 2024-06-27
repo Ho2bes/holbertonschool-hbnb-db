@@ -1,6 +1,15 @@
-"""
-Place related functionality
-"""
+from . import db
+
+class Place(db.Model):
+    id = db.Column(db.String(36), primary_key=True)
+    name = db.Column(db.String(128), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    city_id = db.Column(db.String(36), db.ForeignKey('city.id'), nullable=False)
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
 
 from src.models.base import Base
 from src.models.city import City

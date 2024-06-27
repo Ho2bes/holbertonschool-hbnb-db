@@ -1,6 +1,10 @@
-"""
-City related functionality
-"""
+from . import db
+
+class City(db.Model):
+    id = db.Column(db.String(36), primary_key=True)
+    name = db.Column(db.String(128), nullable=False)
+    state_id = db.Column(db.String(36), db.ForeignKey('state.id'), nullable=False)
+    places = db.relationship('Place', backref='city', lazy=True)
 
 from src.models.base import Base
 from src.models.country import Country
