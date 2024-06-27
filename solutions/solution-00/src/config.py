@@ -10,7 +10,7 @@ This module exports configuration classes for the Flask application.
 from abc import ABC
 import os
 from sqlalchemy import app
-from sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 class Config(object):
     """
