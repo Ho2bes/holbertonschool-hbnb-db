@@ -16,7 +16,6 @@ bcrypt = Bcrypt()
 jwt = JWTManager()
 cors = CORS()
 
-
 def create_app(config_class="src.config.DevelopmentConfig") -> Flask:
     """
     Create a Flask app with the given configuration class.
@@ -26,17 +25,13 @@ def create_app(config_class="src.config.DevelopmentConfig") -> Flask:
 
     # Configuration de l'application
     app.config.from_object(config_class)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
-
     app.url_map.strict_slashes = False
 
     register_extensions(app)
-    register_routes(app)
+
     register_handlers(app)
 
     return app
-
 
 def register_extensions(app: Flask) -> None:
     """Register the extensions for the Flask app"""
@@ -45,7 +40,6 @@ def register_extensions(app: Flask) -> None:
     jwt.init_app(app)
     cors.init_app(app, resources={r"/api/*": {"origins": "*"}})
     # Further extensions can be added here
-
 
 def register_routes(app: Flask) -> None:
     """Import and register the routes for the Flask app"""
@@ -68,15 +62,11 @@ def register_routes(app: Flask) -> None:
     app.register_blueprint(amenities_bp)
     app.register_blueprint(auth_bp)
 
-
 def register_handlers(app: Flask) -> None:
     """Register the error handlers for the Flask app."""
     app.errorhandler(404)(lambda e: (
         {"error": "Not found", "message": str(e)}, 404
-    )
-    )
-    app.errorhandler(400)(
-        lambda e: (
-            {"error": "Bad request", "message": str(e)}, 400
-        )
-    )
+    ))
+    app.errorhandler(400)(lambda e: (
+        {"error": "Bad request", "message": str(e)}, 400
+    ))
