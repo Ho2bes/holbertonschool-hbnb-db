@@ -14,7 +14,9 @@
 
 from src.models.base import Base
 from src.persistence.repository import Repository
-from src.database import db_session
+from src.__init__ import db
+from src.__init__ import app
+from src.__init__ import db_session
 
 class DBRepository(Repository):
     """Dummy DB repository"""
