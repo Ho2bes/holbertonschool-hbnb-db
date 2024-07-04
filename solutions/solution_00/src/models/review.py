@@ -1,8 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
-
+from src import Base
 db = SQLAlchemy()
 
-class Review(db.Model):
+class Review(Base, db.Model):
     """Review representation"""
 
     __tablename__ = 'reviews'

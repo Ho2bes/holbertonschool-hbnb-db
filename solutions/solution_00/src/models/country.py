@@ -1,9 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
+from src import Base
 db = SQLAlchemy()
 
-class Country(db.Model):
+class Country(Base, db.Model):
     """Country representation"""
 
     __tablename__ = 'countries'

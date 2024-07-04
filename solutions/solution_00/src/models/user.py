@@ -1,10 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from . import db, bcrypt
-
+from src import Base
 db = SQLAlchemy()
 
-class User(db.Model):
+class User(Base ,db.Model):
     """User representation"""
 
     __tablename__ = 'users'

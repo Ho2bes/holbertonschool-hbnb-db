@@ -7,7 +7,7 @@ from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 import os
-
+from src import user
 # Chargement des variables d'environnement depuis le fichier .env
 load_dotenv()
 
@@ -28,7 +28,7 @@ def create_app(config_class="src.config.DevelopmentConfig") -> Flask:
     app.url_map.strict_slashes = False
 
     register_extensions(app)
-
+    register_routes(app)
     register_handlers(app)
 
     return app

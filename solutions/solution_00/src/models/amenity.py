@@ -1,9 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
+from src import Base
 db = SQLAlchemy()
 
-class Amenity(db.Model):
+class Amenity(Base ,db.Model):
     """Amenity representation"""
 
     __tablename__ = 'amenities'

@@ -1,9 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
+from src import Base
 db = SQLAlchemy()
 
-class Place(db.Model):
+class Place(Base, db.Model):
     """Place representation"""
 
     __tablename__ = 'places'
